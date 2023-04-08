@@ -1,16 +1,26 @@
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 37.7749, lng: -122.4194},
-      zoom: 8
+      center: {lat: 38.987003, lng: -76.942293},
+      zoom: 14
     });
-  
+
     // Add a marker to the map
     var marker = new google.maps.Marker({
-      position: {lat: 37.7749, lng: -122.4194},
+      position: {lat: 38.987003, lng: -76.942293},
       map: map,
-      title: 'San Francisco'
+      title: 'UMD'
     });
+
+    const panorama = new google.maps.StreetViewPanorama(
+      document.getElementById('pano'),
+      {
+        position: { lat: 37.7749, lng: -122.4194 },
+        pov: { heading: 165, pitch: 0 },
+        zoom: 1
+      }
+    );
   }
+  
   
   // Load the Google Maps API
   function loadMapScript() {

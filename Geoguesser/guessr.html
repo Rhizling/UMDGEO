@@ -5,14 +5,24 @@
     <title>My Map</title>
     <style>
       #map {
-        height: 400px;
+        height: 300px;
+        width: 30%;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+      }
+
+      #pano {
+        height: 600px;
         width: 100%;
+        position: absolute;
       }
     </style>
     <script src="test.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwCIKO3h7vYxfQ22LSsDsNlaQKYomWluE&libraries=places&callback=initMap"></script>
   </head>
   <body>
+    <h1>UMD Geoguessr</h1>
     <div id="pano"></div>
     <div id="map"></div>
   </body>
