@@ -15,7 +15,6 @@ html {
     font-size: 40px;
     border-style:  outset;
     border-color: #bf4540;
-    font-color:  blue;
     font-family: "Audiowide"
   }
   
@@ -26,16 +25,11 @@ html {
   label {
     font-family: "Audiowide"
   }
-  .submit:hover {
-    color: rgb(66,189,138);
-    
+  .play:hover {
+    color: rgb(66,189,138); 
   }
   
-  button:hover {
-    color: rgb(51,113,204);
-  }
-  
-  .login {
+  .homebuttons {
     margin: 25px;
   }
   
