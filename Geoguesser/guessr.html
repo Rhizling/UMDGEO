@@ -22,10 +22,11 @@
       #submit {
         position: absolute;
         bottom: 30px;
-        right: 225px;
+        right: 200px;
         z-index: 1;
         color: black;
-        border: 0.5rem ridge black;
+        border: 0.5rem solid black;
+        border-radius: 10%;
         font-size: 2rem;
         background-color: white;
       }
@@ -45,10 +46,16 @@
         
       }
 
+      .gradient {
+        background: linear-gradient(to top, rgb(204, 183, 183), rgb(240, 150, 150), rgb(229, 22, 22));
+      }
+
       #score {
-        background-color: white;
-        z-index: 300;
+        background-color: black;
+        z-index: 150;
         border: 5rem solid black;
+        height:100%;
+        width: 100%;
       }
     </style>
     <script src="guessr.js"></script>
@@ -59,6 +66,6 @@
     <div id="map"></div>
     <input id="submit" type="button" value="Guess" onclick="getUserLocation()">
     <div id="timer"></div>
-    <div id="score"></div>
+    
   </body>
 </html>

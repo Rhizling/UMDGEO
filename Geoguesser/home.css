@@ -44,9 +44,9 @@ label {
 } 
 
 #leftshell {
-  position: fixed;
+  position: relative;
   left: 0;
-  bottom:0;
+  top: 0;
   /*margin-left: 0;
   margin-bottom: 0;*/
   width: 350px;
@@ -60,10 +60,11 @@ label {
   /*margin-right: 0;
   margin-bottom: 0;*/
   width: 350px;
+  
 }
 
 #play {
-  width: 150px;
+  width: 150px
 }
 
 #play:hover {
