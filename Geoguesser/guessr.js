@@ -2,13 +2,13 @@ var previousMarker;
 var interval;
 var result;
 
-
+let name;
 
 function initMap() {
   clearInterval(interval);
 
   let myMatches = document.cookie.match(/([A-Za-z0-9]+)\=([A-Za-z]+)/);
-  let name = myMatches[1];
+  name = myMatches[1];
   let difficulty = myMatches[2];
 
   let radius = 0.785;
@@ -107,9 +107,32 @@ function getRandomLocation(center, radius) {
 }
 
 function getUserLocation() {
+  clearInterval(interval);
   var position = previousMarker.getPosition();
-  lat = position.lat();
-  lng = position.lng();
+  var lat = position.lat();
+  var lng = position.lng();
+  var lat2 = result.lat;
+  var lng2 = result.lng;
+
+  var distanceFrom = distance(lat, lng, lat2, lng2);
+  console.log(distanceFrom);
+  distanceFrom = distanceFrom * 5280;
+  distanceFrom = distanceFrom.toFixed(0);
+  console.log(distanceFrom);
+
+  function distance(lat1, lon1, lat2, lon2) {
+    var R = 3958.8; // Radius of the Earth in miles
+    var dLat = toRadians(lat2 - lat1);
+    var dLon = toRadians(lon2 - lon1);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var dist = R * c;
+    return dist;
+  }
+
+  function toRadians(degrees) {
+    return (degrees * Math.PI) / 180;
+  }
 
   document.querySelector("body").innerHTML = "";
   let newInfo = "";
@@ -129,7 +152,7 @@ function getUserLocation() {
 
     border: 1rem solid black;
     border-radius: 10%;
-    height: 90%;
+    height: 95%;
     width: 90%;
   }`;
 
@@ -141,10 +164,14 @@ function getUserLocation() {
   }
   #playagain {
     margin-left: 45%;
-    margin-top: 10%;
     font-size: 2rem;
     border: 0.5rem solid black;
     border-radius: 10%;
+  }
+  
+  #distance {
+    font-size: 2rem;
+    text-align: center;
   }`;
   newInfo += `</style>`;
 
@@ -153,6 +180,10 @@ function getUserLocation() {
   <div id="container">
     <h1 id="title" style="text-align:center; font-size: 240%"> Round Over! </h1>
     <div id="resultmap"></div>
+    <br>
+    <div id="distance"></div>
+    <br>
+    <br>
     <a href = "./home.html"> <input type="button" id="playagain" value="Play Again!"> </a>
   </div>
   `
@@ -201,6 +232,8 @@ function getUserLocation() {
     strokeWeight: 2
   };
   
+  document.getElementById("distance").innerHTML = `User ${name} guessed ${distanceFrom} feet away from the actual location!`;
+
   const line = new google.maps.Polyline(lineOptions);
   line.setMap(standardMap);
 
@@ -230,7 +263,7 @@ function noGuess() {
 
     border: 1rem solid black;
     border-radius: 10%;
-    height: 90%;
+    height: 95%;
     width: 90%;
   }`;
 
@@ -243,7 +276,6 @@ function noGuess() {
   
   #playagain {
     margin-left: 45%;
-    margin-top: 5%;
     font-size: 2rem;
     border: 0.5rem solid black;
     border-radius: 10%;
@@ -256,6 +288,8 @@ function noGuess() {
     <h1 id="title" style="text-align:center; font-size: 240%"> You didn't make a guess! </h1>
     <h1 id="subtitle" style="text-align:center; "> (Here's the location) </h1>
     <div id="resultmap"></div>
+    <br>
+    <br>
     <a href = "./home.html"> <input type="button" id="playagain" value="Play Again!"> </a>
   </div>
   `
