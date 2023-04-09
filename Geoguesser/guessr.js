@@ -1,6 +1,19 @@
 var previousMarker;
 var interval;
 
+let myMatches = document.cookie.match(/([A-Za-z0-9]+)\=([A-Za-z]+)/);
+let name = myMatches[1]
+let difficulty = myMatches[2]
+console.log(name)
+console.log(difficulty)
+
+let radius = 0.785
+if (difficulty == "easy") {
+  radius = 0.585
+} else if (difficulty == "medium") {
+  radius = 0.685
+}
+
 function initMap() {
   clearInterval(interval);
 
@@ -17,7 +30,7 @@ function initMap() {
     clickableIcons: false,
   });
 
-  const result = getRandomLocation({ lat: 38.987003, lng: -76.942293 }, 0.785);
+  const result = getRandomLocation({ lat: 38.987003, lng: -76.942293 }, radius);
 
   const panorama = new google.maps.StreetViewPanorama(document.getElementById("pano"), {
     position: { lat: result.lat, lng: result.lng },
@@ -37,6 +50,12 @@ function initMap() {
   var map;
   var timerElement = document.getElementById("timer");
   var counter = 20;
+  if (difficulty == "easy") {
+    counter = 40;
+  } else if (difficulty == "medium") {
+    counter = 30;
+  }
+  
 
   // Start the timer update interval
   interval = setInterval(updateTimer, 1000);
